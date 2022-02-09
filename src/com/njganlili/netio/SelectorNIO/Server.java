@@ -1,4 +1,4 @@
-package com.njganlili.netio.nio;
+package com.njganlili.netio.SelectorNIO;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Server {
     // 服务器监听的端口
-    private final static int PORT = 9082;
+    private final static int PORT = 8001;
     private Selector selector = null;
     private ServerSocketChannel serverChannel = null;
 
@@ -110,7 +110,7 @@ public class Server {
                         break;
                     }
 
-                    int bodyLen = this.recvBuff.getInt();
+                    Integer bodyLen = this.recvBuff.getInt();
                     if (bodyLen > this.recvBuff.remaining()) {
                         // Incomplete message body
                         break;

@@ -1,4 +1,4 @@
-package com.njganlili.netio.bioToNio.first;
+package com.njganlili.netio.SingleNio;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,19 +21,18 @@ import java.util.concurrent.*;
 public class Server {
 
     public static void main(String[] args) throws Exception {
-        SocketChannel socketChannel = null;
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open().bind(new InetSocketAddress("127.0.0.1", 8001));
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().bind(new InetSocketAddress("127.0.0.1", 8001));
+        serverSocketChannel.socket().setReuseAddress(true);
         serverSocketChannel.configureBlocking(false);
         ByteBuffer recvBuff = ByteBuffer.allocate(1024);
         ByteBuffer sendBuff = ByteBuffer.allocate(1024);
         byte[] body = new byte[1024];
-        int request_times = 10;
         while (true){
-            socketChannel = serverSocketChannel.accept();
-            if(socketChannel == null){
-                System.out.println("waiting..........");
-                Thread.sleep(1000);
-            }else {
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            if(socketChannel != null){
+                System.out.println("收到连接..........");
+                socketChannel.read(recvBuff);
                 int bodyLen = recvBuff.getInt();
                 if (bodyLen >0){
                     recvBuff.get(body, 0, bodyLen);
@@ -44,10 +43,14 @@ public class Server {
                 //设置日期格式
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String resp = "The server time : " + df.format(new Date());
+                sendBuff.putInt(resp.length());
                 sendBuff.put(resp.getBytes());
                 sendBuff.flip();
                 socketChannel.write(sendBuff);
+
+                recvBuff.rewind();
                 sendBuff.rewind();
+                System.out.println("结束");
             }
         }
     }

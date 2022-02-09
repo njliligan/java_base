@@ -1,4 +1,4 @@
-package com.njganlili.netio.bioToNio.first;
+package com.njganlili.netio.SingleNio;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,18 +27,23 @@ public class Client {
         while (true){
             //设置日期格式
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String resp = "The server time : " + df.format(new Date());
-            sendBuff.put(resp.getBytes());
+            String request = "Request time："+ df.format(new Date());
+            sendBuff.putInt(request.length());
+            sendBuff.put(request.getBytes());
+            sendBuff.flip();
             socketChannel.write(sendBuff);
-            sendBuff.rewind();
 
+            System.out.println("收到连接..........");
+            socketChannel.read(recvBuff);
             int bodyLen = recvBuff.getInt();
-            if (bodyLen>0){
+            if (bodyLen > 0){
                 recvBuff.get(body, 0, bodyLen);
                 System.out.println("Recv message from client: " +
                         new String(body, 0, bodyLen));
                 recvBuff.clear();
             }
+            recvBuff.rewind();
+            sendBuff.rewind();
             Thread.sleep(2000);
         }
     }

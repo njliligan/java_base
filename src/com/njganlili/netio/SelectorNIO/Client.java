@@ -1,4 +1,4 @@
-package com.njganlili.netio.nio;
+package com.njganlili.netio.SelectorNIO;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Client {
     // 服务器监听的端口
-    private final static int PORT = 9082;
+    private final static int PORT = 8001;
 
     public static void main(String[] args) {
         SocketChannel sock = null;
@@ -70,16 +70,15 @@ public class Client {
                     break;
                 }
 
-                if (rquest_times-- == 0) {
-                    break;
-                }
+//                if (rquest_times-- == 0) {
+//                    break;
+//                }
 
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 sendBuff.rewind();
             }
         } catch (IOException e) {
