@@ -2,37 +2,38 @@ package com.njganlili.netio.bio.second;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
 public class Client {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Socket client = new Socket("127.0.0.1", 8001);
+
+        client.setSendBufferSize(5);
+        client.setTcpNoDelay(true);
+
         byte[] bytes = new byte[1024];
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(client.getOutputStream());
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(client.getInputStream());
+        OutputStream out = client.getOutputStream();
+        InputStream in = client.getInputStream();
+        byte[] buffer = new byte[1024];
         int a = 1;
         while (true) {
-            byte[] buffer = new byte[1024];
-//            int l = bufferedInputStream.read(buffer);
-//            String s = new String(buffer, 0, l);
-//            System.out.printf("received message: %s\n", s);
-            bufferedOutputStream.write("hello".getBytes(StandardCharsets.UTF_8), 0, "hello".getBytes(StandardCharsets.UTF_8).length);
-            bufferedOutputStream.flush();
-            if(a == 2){
-                bufferedOutputStream.write("close".getBytes(StandardCharsets.UTF_8), 0, "hello".getBytes(StandardCharsets.UTF_8).length);
-                bufferedOutputStream.flush();
+            out.write("hello".getBytes(StandardCharsets.UTF_8));
+            out.flush();
+            //网卡和程序异步，flush只是写出缓冲区，不一定发送出去了。
+            if (a == 5) {
+                out.write("close".getBytes(StandardCharsets.UTF_8));
+                out.flush();
             }
             a++;
-//            a++;
-//            if (a == 10) {
-//                bufferedOutputStream.write("close".getBytes(StandardCharsets.UTF_8), 0, "close".getBytes(StandardCharsets.UTF_8).length);
-//                bufferedOutputStream.flush();
-//            }
-            System.out.println();
-            Thread.sleep(1000);
+            int l = in.read(buffer);
+            String s = new String(buffer, 0, l);
+            System.out.printf("received message: %s\n", s);
+            if("bye~".equals(s)){
+                client.close();
+                break;
+            }
+            Thread.sleep(2000);
         }
     }
 

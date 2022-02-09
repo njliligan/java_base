@@ -1,4 +1,4 @@
-package com.njganlili.socket;
+package com.njganlili.netio.socket;
 
 import java.net.*;
 import java.io.*;
