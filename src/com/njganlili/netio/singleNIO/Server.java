@@ -1,18 +1,12 @@
-package com.njganlili.netio.SingleNio;
+package com.njganlili.netio.singleNIO;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
-import java.util.concurrent.*;
 
 /**
  * BIO
@@ -28,13 +22,13 @@ public class Server {
         ByteBuffer recvBuff = ByteBuffer.allocate(1024);
         ByteBuffer sendBuff = ByteBuffer.allocate(1024);
         byte[] body = new byte[1024];
-        while (true){
+        while (true) {
             SocketChannel socketChannel = serverSocketChannel.accept();
-            if(socketChannel != null){
+            if (socketChannel != null) {
                 System.out.println("收到连接..........");
                 socketChannel.read(recvBuff);
                 int bodyLen = recvBuff.getInt();
-                if (bodyLen >0){
+                if (bodyLen > 0) {
                     recvBuff.get(body, 0, bodyLen);
                     System.out.println("Recv message from client: " +
                             new String(body, 0, bodyLen));
@@ -43,8 +37,15 @@ public class Server {
                 //设置日期格式
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String resp = "The server time : " + df.format(new Date());
-                sendBuff.putInt(resp.length());
-                sendBuff.put(resp.getBytes());
+
+                byte[] respBytes = resp.getBytes(StandardCharsets.UTF_8);
+                System.out.printf("message package data length: %d, totoal package length: %d%n",
+                        respBytes.length,
+                        respBytes.length + Integer.BYTES);
+
+                sendBuff.putInt(respBytes.length);
+                sendBuff.put(respBytes);
+
                 sendBuff.flip();
                 socketChannel.write(sendBuff);
 
