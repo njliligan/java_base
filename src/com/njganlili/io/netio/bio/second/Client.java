@@ -1,4 +1,4 @@
-package com.njganlili.netio.bio.second;
+package com.njganlili.io.netio.bio.second;
 
 import java.io.*;
 import java.net.Socket;

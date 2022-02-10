@@ -1,4 +1,4 @@
-package com.njganlili.netio.bio.chat;
+package com.njganlili.io.netio.bio.chat;
 
 import java.io.*;
 import java.net.Socket;

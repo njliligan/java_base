@@ -1,4 +1,4 @@
-package com.njganlili.netio.singleNIO;
+package com.njganlili.io.netio.nio.singleNIO;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

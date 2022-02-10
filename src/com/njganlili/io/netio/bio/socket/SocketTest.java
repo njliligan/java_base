@@ -1,4 +1,4 @@
-package com.njganlili.netio.socket;
+package com.njganlili.io.netio.bio.socket;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

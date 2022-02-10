@@ -1,9 +1,7 @@
-package com.njganlili.netio.bio.first;
+package com.njganlili.io.netio.bio.first;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
 public class Client {
 

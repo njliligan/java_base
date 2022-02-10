@@ -1,4 +1,4 @@
-package com.njganlili.netio.bio.first;
+package com.njganlili.io.netio.bio.first;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
