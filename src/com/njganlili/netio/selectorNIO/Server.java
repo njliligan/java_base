@@ -15,7 +15,7 @@ public class Server {
     private Selector selector = null;
     private ServerSocketChannel serverChannel = null;
 
-    private static class Client{
+    private static class Client {
         // 接收 buffer 长度
         private final static int RECV_BUF_LEN = 1024;
         // 接收buffer 声明
@@ -31,7 +31,7 @@ public class Server {
         private SelectionKey sk_ = null;
         private boolean canSend = true;
 
-        public Client(Selector selector, SocketChannel newSock){
+        public Client(Selector selector, SocketChannel newSock) {
             this.selector = selector;
             this.socketChannel = newSock;
             this.recvBuff = ByteBuffer.allocate(RECV_BUF_LEN);
@@ -39,9 +39,9 @@ public class Server {
             this.register(SelectionKey.OP_READ);
         }
 
-        private void register(int op){
+        private void register(int op) {
             try {
-                if (sk_ == null){
+                if (sk_ == null) {
                     sk_ = this.socketChannel.register(selector, op, this);
                 } else {
                     sk_.interestOps(op | sk_.interestOps());
@@ -51,7 +51,7 @@ public class Server {
             }
         }
 
-        public void cancelEvent(int ops){
+        public void cancelEvent(int ops) {
             if (sk_ == null) {
                 return;
             }
@@ -63,7 +63,7 @@ public class Server {
             try {
                 int totalSendBytes = 0;
                 String resp = null;
-                if (canSend){
+                if (canSend) {
                     //设置日期格式
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     resp = "The server time : " + df.format(new Date());
@@ -72,7 +72,7 @@ public class Server {
                     totalSendBytes = resp.length() + 4;
 
                     sendBuff.flip();
-                }else {
+                } else {
                     totalSendBytes = sendBuff.remaining();
                 }
 
@@ -82,7 +82,7 @@ public class Server {
                     this.register(SelectionKey.OP_WRITE);
                     canSend = false;
                 } else {
-                    if (!canSend){
+                    if (!canSend) {
                         canSend = true;
                     }
                     sendBuff.rewind();
@@ -92,14 +92,14 @@ public class Server {
             }
         }
 
-        public int recvData(){
+        public int recvData() {
             try {
                 int recvBytes = this.socketChannel.read(this.recvBuff);
-                if (recvBytes < 0){
+                if (recvBytes < 0) {
                     System.out.println("Meet error or the end of stream");
                     close();
                     return -1;
-                }else if (recvBytes == 0){
+                } else if (recvBytes == 0) {
                     return 0;// eagain
                 }
 
@@ -131,10 +131,10 @@ public class Server {
             return -1;
         }
 
-        public void close(){
+        public void close() {
             try {
                 cancelEvent(SelectionKey.OP_WRITE | SelectionKey.OP_READ);
-                if (this.socketChannel != null){
+                if (this.socketChannel != null) {
                     this.socketChannel.close();
                 }
             } catch (IOException e) {
@@ -143,7 +143,7 @@ public class Server {
         }
     }
 
-    public void start(){
+    public void start() {
         try {
             selector = Selector.open();
 
@@ -165,7 +165,7 @@ public class Server {
     public void process() {
         try {
             while (true) {
-                int readyChannels = selector.select();
+                int readyChannels = selector.select(3000);
                 if (readyChannels == 0) {
                     System.out.println("No socket has i/o events");
                     continue;
@@ -176,40 +176,44 @@ public class Server {
 
                 while (keyIterator.hasNext()) {
                     SelectionKey key = keyIterator.next();
-                    if (key != null) {
-                        if (key.isAcceptable()) {
-                            // a connection was accepted by a ServerSocketChannel.
-                            ServerSocketChannel ssc = (ServerSocketChannel) key.attachment();
-                            SocketChannel newSock = ssc.accept();
-                            newSock.configureBlocking(false);
-                            Client client = new Client(selector, newSock);
-                        } else if (key.isConnectable()) {
-                            // a connection was established with a remote server.
-                        } else if (key.isReadable()) {
-                            // a channel is ready for reading
-                            Client client = (Client) key.attachment();
-                            int rc = client.recvData();
-                            if (rc == 0) {
-                                client.sendData();
-                            }
-                        } else if (key.isWritable()) {
-                            // a channel is ready for writing
-                            Client client = (Client) key.attachment();
-                            client.cancelEvent(SelectionKey.OP_WRITE);
+                    if (!key.isValid()) {
+                        keyIterator.remove();
+                    }
+                    if (key.isAcceptable()) {
+                        // a connection was accepted by a ServerSocketChannel.
+                        ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
+                        SocketChannel newSock = ssc.accept();
+                        newSock.configureBlocking(false);
+                        Client client = new Client(selector, newSock);
+                    }
+                    if (key.isConnectable()) {
+                        // a connection was established with a remote server.
+                    }
+                    if (key.isReadable()) {
+                        // a channel is ready for reading
+                        Client client = (Client) key.attachment();
+                        int rc = client.recvData();
+                        if (rc == 0) {
                             client.sendData();
                         }
                     }
-                    keyIterator.remove();
+                    if (key.isWritable()) {
+                        // a channel is ready for writing
+                        Client client = (Client) key.attachment();
+                        client.cancelEvent(SelectionKey.OP_WRITE);
+                        client.sendData();
+                    }
                 }
+                keyIterator.remove();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void stop(){
+    public void stop() {
         try {
-            if (serverChannel != null){
+            if (serverChannel != null) {
                 serverChannel.close();
                 serverChannel = null;
             }
