@@ -1,0 +1,1 @@
+lambda 表达式需要函数式接口(接口中只有一个抽象方法，有些也有@FunctionalInterface的申明)的支持

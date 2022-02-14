@@ -11,7 +11,6 @@ import java.util.List;
  * @date 2022/2/13 10:09
  */
 public class CommonUtil {
-
     public static List<User> getUserList(){
         List<User> users = new ArrayList<>();
         users.add(new User().setAge(18).setName("lili").setSex("M"));
@@ -21,6 +20,5 @@ public class CommonUtil {
         users.add(new User().setAge(30).setName("lose").setSex("W"));
         return users;
     }
-
 
 }
