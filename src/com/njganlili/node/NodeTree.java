@@ -10,7 +10,6 @@ import java.util.*;
 public class NodeTree {
 
     public static void main(String[] args) {
-
         Node node = getNodeTree();
         System.out.println("完成树构建");
         delete(node);
@@ -20,26 +19,13 @@ public class NodeTree {
     private static Node getNodeTree() {
         Node nodeFirstA = new Node().setName("o");
         Node nodeFirstXyz = new Node().setName("xyz");
-
-        ArrayList<Node> arrayList = new ArrayList<>();
-        arrayList.add(nodeFirstA);
-        ArrayList<Node> arrayList1 = new ArrayList<>();
-        arrayList1.add(nodeFirstXyz);
-        Node nodeSecondXyz = new Node().setName("xyz").setChildren(arrayList);
+        Node nodeSecondXyz = new Node().setName("xyz").setChildren(new ArrayList<>(Arrays.asList(nodeFirstA)));
         Node nodeSecondM = new Node().setName("m");
         Node nodeSecondL = new Node().setName("l");
-        Node nodeSecondQ = new Node().setName("q").setChildren(arrayList1);
-
-        ArrayList<Node> arrayList2 = new ArrayList<>();
-        arrayList2.addAll(Arrays.asList(nodeSecondXyz, nodeSecondM));
-        ArrayList<Node> arrayList3 = new ArrayList<>();
-        arrayList3.addAll(Arrays.asList(nodeSecondL, nodeSecondQ));
-        Node nodeThreeB = new Node().setName("b").setChildren(arrayList2);
-        Node nodeThreeXyz = new Node().setName("xyz").setChildren(arrayList3);
-
-        ArrayList<Node> arrayList4 = new ArrayList<>();
-        arrayList4.addAll(Arrays.asList(nodeThreeB, nodeThreeXyz));
-        Node nodeFourA = new Node().setName("a").setChildren(arrayList4);
+        Node nodeSecondQ = new Node().setName("q").setChildren(new ArrayList<>(Arrays.asList(nodeFirstXyz)));
+        Node nodeThreeB = new Node().setName("b").setChildren(new ArrayList<>(Arrays.asList(nodeSecondXyz,nodeSecondM)));
+        Node nodeThreeXyz = new Node().setName("xyz").setChildren(new ArrayList<>(Arrays.asList(nodeSecondL,nodeSecondQ)));
+        Node nodeFourA = new Node().setName("a").setChildren(new ArrayList<>(Arrays.asList(nodeThreeB, nodeThreeXyz)));
         return nodeFourA;
     }
 
