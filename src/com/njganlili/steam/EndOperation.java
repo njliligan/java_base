@@ -26,13 +26,13 @@ public class EndOperation {
 //        min：返回流中元素最小值
         List<User> users = CommonUtil.getUserList();
         boolean sexAllExit = users.stream().allMatch(user -> {
-            return Objects.nonNull(user.getSex());
+            return Objects.nonNull(user.getUserSex());
         });
         boolean sexNoneExit = users.stream().noneMatch(user -> {
-            return Objects.nonNull(user.getSex());
+            return Objects.nonNull(user.getUserSex());
         });
         boolean sexAnyExit = users.stream().anyMatch(user -> {
-            return Objects.nonNull(user.getSex());
+            return Objects.nonNull(user.getUserSex());
         });
 
         Optional<User> firstUser = users.stream().findFirst();
@@ -41,20 +41,20 @@ public class EndOperation {
         Long countUser = users.stream().count();
 
         Optional<Integer> maxAge = users.stream().max(((o1, o2) -> {
-            if (o1.getAge() == o2.getAge()){
-                return o1.getName().compareTo(o2.getName());
+            if (o1.getUserAge() == o2.getUserAge()){
+                return o1.getUserName().compareTo(o2.getUserName());
             }else {
-                return o1.getAge().compareTo(o2.getAge());
+                return o1.getUserAge().compareTo(o2.getUserAge());
             }
-        })).map(User::getAge);
+        })).map(User::getUserAge);
 
         Optional<Integer> minAge = users.stream().min(((o1, o2) -> {
-            if (o1.getAge() == (o2.getAge())){
-                return o1.getName().compareTo(o2.getName());
+            if (o1.getUserAge() == (o2.getUserAge())){
+                return o1.getUserName().compareTo(o2.getUserName());
             }else {
-                return o1.getAge().compareTo(o2.getAge());
+                return o1.getUserAge().compareTo(o2.getUserAge());
             }
-        })).map(User::getAge);
+        })).map(User::getUserAge);
         if(minAge.isPresent()){
             System.out.println(minAge.get());
         }
@@ -105,37 +105,37 @@ public class EndOperation {
         //                UNORDERED：表示该收集操作不会保留流中元素原有的顺序。
         //                IDENTITY_FINISH：表示finisher参数只是标识而已，可忽略。
         //装成list
-        List<Integer> ageList = users.stream().map(User::getAge).collect(Collectors.toList()); // [10, 20, 10]
+        List<Integer> ageList = users.stream().map(User::getUserAge).collect(Collectors.toList()); // [10, 20, 10]
         //转成set
-        Set<Integer> ageSet = users.stream().map(User::getAge).collect(Collectors.toSet()); // [20, 10]
+        Set<Integer> ageSet = users.stream().map(User::getUserAge).collect(Collectors.toSet()); // [20, 10]
         //转成map,注:key不能相同，否则报错
-        Map<String, Integer> stringStringMap = users.stream().collect(Collectors.toMap(User::getName, User::getAge)); // {cc=10, bb=20, aa=10}
+        Map<String, Integer> stringStringMap = users.stream().collect(Collectors.toMap(User::getUserName, User::getUserAge)); // {cc=10, bb=20, aa=10}
         //返回自身
-        Map<String, User> stringUserMap = users.stream().collect(Collectors.toMap(User::getName, Function.identity(),(key1,key2)->key2)); // {cc=10, bb=20, aa=10}
+        Map<String, User> stringUserMap = users.stream().collect(Collectors.toMap(User::getUserName, Function.identity(),(key1, key2)->key2)); // {cc=10, bb=20, aa=10}
         //字符串分隔符连接
-        String joinName = users.stream().map(User::getName).collect(Collectors.joining(",", "(", ")")); // (aa,bb,cc)
+        String joinName = users.stream().map(User::getUserName).collect(Collectors.joining(",", "(", ")")); // (aa,bb,cc)
         //聚合操作
         //1.学生总数
         Long count = users.stream().collect(Collectors.counting()); // 3
         //2.最大年龄 (最小的minBy同理)
-        Integer maxAges = users.stream().map(User::getAge).collect(Collectors.maxBy(Integer::compare)).get(); // 20
+        Integer maxAges = users.stream().map(User::getUserAge).collect(Collectors.maxBy(Integer::compare)).get(); // 20
         //3.所有人的年龄
-        Integer sumAge = users.stream().collect(Collectors.summingInt(User::getAge)); // 40
+        Integer sumAge = users.stream().collect(Collectors.summingInt(User::getUserAge)); // 40
         //4.平均年龄
-        Double averageAge = users.stream().collect(Collectors.averagingDouble(User::getAge)); // 13.333333333333334
+        Double averageAge = users.stream().collect(Collectors.averagingDouble(User::getUserAge)); // 13.333333333333334
         // 带上以上所有方法
-        DoubleSummaryStatistics statistics = users.stream().collect(Collectors.summarizingDouble(User::getAge));
+        DoubleSummaryStatistics statistics = users.stream().collect(Collectors.summarizingDouble(User::getUserAge));
         System.out.println("count:" + statistics.getCount() + ",max:" + statistics.getMax() + ",sum:" + statistics.getSum() + ",average:" + statistics.getAverage());
 
         //分组
-        Map<Integer, List<User>> ageMap = users.stream().collect(Collectors.groupingBy(User::getAge));
+        Map<Integer, List<User>> ageMap = users.stream().collect(Collectors.groupingBy(User::getUserAge));
         //多重分组,先根据类型分再根据年龄分
-        Map<String, Map<Integer, List<User>>> typeAgeMap = users.stream().collect(Collectors.groupingBy(User::getSex, Collectors.groupingBy(User::getAge)));
+        Map<String, Map<Integer, List<User>>> typeAgeMap = users.stream().collect(Collectors.groupingBy(User::getUserSex, Collectors.groupingBy(User::getUserAge)));
         //分区
 //分成两部分，一部分大于10岁，一部分小于等于10岁
-        Map<Boolean, List<User>> partMap = users.stream().collect(Collectors.partitioningBy(vv -> vv.getAge() > 10));
+        Map<Boolean, List<User>> partMap = users.stream().collect(Collectors.partitioningBy(vv -> vv.getUserAge() > 10));
         //规约
-        Integer allAge = users.stream().map(User::getAge).collect(Collectors.reducing(Integer::sum)).get(); //40
+        Integer allAge = users.stream().map(User::getUserAge).collect(Collectors.reducing(Integer::sum)).get(); //40
 
 
     }

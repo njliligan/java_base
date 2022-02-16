@@ -1,6 +1,7 @@
 package com.njganlili.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author njgan
@@ -9,45 +10,130 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
-    private String name;
+    private String userName;
 
-    private Integer age;
+    private Integer userAge;
 
-    private String sex;
+    private String userSex;
 
-    public String getName() {
-        return name;
+    private String userIdCard;
+
+    private String revision;
+
+    private String createdBy;
+
+    private Date createdTime;
+
+    private String updatedBy;
+
+    private Date updatedTime;
+
+    private String id;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public User setName(String name) {
-        this.name = name;
+    public User setUserName(String userName) {
+        this.userName = userName;
         return this;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getUserAge() {
+        return userAge;
     }
 
-    public User setAge(Integer age) {
-        this.age = age;
+    public User setUserAge(Integer userAge) {
+        this.userAge = userAge;
         return this;
     }
 
-    public String getSex() {
-        return sex;
+    public String getUserSex() {
+        return userSex;
     }
 
-    public User setSex(String sex) {
-        this.sex = sex;
+    public User setUserSex(String userSex) {
+        this.userSex = userSex;
+        return this;
+    }
+
+    public String getUserIdCard() {
+        return userIdCard;
+    }
+
+    public User setUserIdCard(String userIdCard) {
+        this.userIdCard = userIdCard;
+        return this;
+    }
+
+    public String getRevision() {
+        return revision;
+    }
+
+    public User setRevision(String revision) {
+        this.revision = revision;
+        return this;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public User setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public User setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public User setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+        return this;
+    }
+
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public User setUpdatedTime(Date updatedTime) {
+        this.updatedTime = updatedTime;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public User setId(String id) {
+        this.id = id;
         return this;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
-                ", age='" + age + '\'' +
-                ", sex='" + sex + '\'' +
+                "userName='" + userName + '\'' +
+                ", userAge=" + userAge +
+                ", userSex='" + userSex + '\'' +
+                ", userIdCard='" + userIdCard + '\'' +
+                ", revision='" + revision + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", createdTime=" + createdTime +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", updatedTime=" + updatedTime +
+                ", id='" + id + '\'' +
                 '}';
     }
+
 }

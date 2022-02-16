@@ -3,7 +3,6 @@ package com.njganlili.optional;
 import com.njganlili.CommonUtil;
 import com.njganlili.model.User;
 
-import javax.swing.*;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -66,7 +65,7 @@ public class OptionalTest {
         System.out.println(optionalUsers.isPresent() ? System.out.printf("isPresent") : System.out.printf("isNotPresent"));
 
         optionalUsers.ifPresentOrElse(user -> {
-            users.stream().collect(groupingBy(User::getSex));
+            users.stream().collect(groupingBy(User::getUserSex));
         },()->{
             System.out.println("ifPresentoRElse");
         });
