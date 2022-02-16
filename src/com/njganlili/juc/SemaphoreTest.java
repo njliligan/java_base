@@ -3,7 +3,7 @@ package com.njganlili.juc;
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.Semaphore;
 
-//信号灯,限流
+//信号灯,限流，只能允许n个线程同时执行
 public class SemaphoreTest {
     public static void main(String[] args) {
 

@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+//非公平锁，重入的互斥锁
 public class ReentrantLockTest {
     ReentrantLock lock = new ReentrantLock();
 

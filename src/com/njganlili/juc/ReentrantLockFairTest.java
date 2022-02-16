@@ -2,6 +2,7 @@ package com.njganlili.juc;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+//公平锁，重入的互斥锁
 public class ReentrantLockFairTest extends Thread {
     ReentrantLock lock = new ReentrantLock(true);
 

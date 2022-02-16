@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+//打断
 public class ReentrantInterruptibyLockTest {
 
 

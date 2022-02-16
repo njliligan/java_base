@@ -2,7 +2,7 @@ package com.njganlili.juc;
 
 import java.util.concurrent.CountDownLatch;
 
-//倒计时达到就放
+//计数器，不能重复使用，归零就放
 public class CountDownLatchTest {
     public static void main(String[] args) {
         Thread[] threads =new Thread[100];

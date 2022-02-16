@@ -3,7 +3,7 @@ package com.njganlili.juc;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-//等到一定的线程数才能执行
+//循环栅栏，等到一定的线程数才能执行，可以循环
 public class CyclicBarrierTest {
 
     public static void main(String[] args) {

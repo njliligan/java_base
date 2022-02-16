@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-//共享加排他锁
+//共享加排他锁，读写锁
 public class ReentrantReadWriteLockTest {
 
     //互斥排他
