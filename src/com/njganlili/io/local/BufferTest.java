@@ -45,13 +45,13 @@ public class BufferTest {
 //　　 FloatBuffer
 //　　 DoubleBuffer
 //　　 LongBuffer
-    BufferedWriter bufferedWriter = new BufferedWriter();
+    //BufferedWriter bufferedWriter = new BufferedWriter();
     //
     StringBuffer stringBuffer = new StringBuffer();
     //线程不安全
     StringBuilder stringBuilder = new StringBuilder();
 
-    BufferedWriter bufferedWriter =new BufferedWriter();
+    //BufferedWriter bufferedWriter =new BufferedWriter();
 
 
 
