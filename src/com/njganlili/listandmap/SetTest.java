@@ -16,6 +16,7 @@ public class SetTest {
         //TreeSet 底层使用红黑树，能够按照按照某种规则对元素进行排序，排序的方式有自然排序和定制排序。集合中的元素是有序的，集合中的元素是唯一的。
 
         HashSet set =new HashSet<>();
+        set.add("as");
         LinkedHashSet<Object> objects = new LinkedHashSet<>();
         TreeSet treeSet = new TreeSet();
     }

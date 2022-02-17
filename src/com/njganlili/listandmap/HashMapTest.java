@@ -23,6 +23,15 @@ public class HashMapTest {
         //将根据它们的 compareTo() 方法(或外部提供的比较器)根据键的“自然排序”进行迭代。此外，它还实现 SortedMap 接口，该接口包含依赖于此排序顺序的方法
         TreeMap treeMap = new TreeMap();
         IdentityHashMap<Object, Object> objectObjectIdentityHashMap = new IdentityHashMap<>();
+        objectObjectIdentityHashMap.put("sdf","sdf");
+        objectObjectIdentityHashMap.put("sdf","sdfsdf");
+        System.out.println(objectObjectIdentityHashMap.get("sdf"));
+        if (new String("asdf") == new String("asdf")){
+            System.out.println("string 对象相同");
+        }
+        if ("asdf" == "asdf"){
+            System.out.println("string 对象相同");
+        }
         hashMap.put(null,null);
         hashMap.put(null,"1");
         hashMap.put("1",null);
