@@ -1,4 +1,4 @@
-package com.njganlili.callback;
+package com.njganlili.callback.teacherandstudent;
 
 /**
  * @author njgan
@@ -12,7 +12,16 @@ public class CallbackTest {
     public static void main(String[] args) {
         Student student = new Rick();
         Teacher teacher = new Teacher(student);
+        new Runnable(){
+            @Override
+            public void run() {
 
+            }
+        };
+        Runnable runnable =
+                () -> {
+                    System.out.println("run");
+                };
         teacher.askQuestion();
     }
 }
