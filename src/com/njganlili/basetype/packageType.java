@@ -1,4 +1,4 @@
-package com.njganlili.packageType;
+package com.njganlili.basetype;
 
 /**
  * @author njgan
@@ -13,8 +13,15 @@ public class packageType {
         Integer b = 100;
         Integer c = 128;
         Integer d = 128;
+        //新对象
+        Integer e = new Integer(100);
+        Integer f = new Integer(100);
+        //True
         System.out.println(a == b );
+        System.out.println(a.equals(b));
         System.out.println(c == d );
+        System.out.println(e == f );
+        System.out.println(e.equals(f));
     }
 
 }

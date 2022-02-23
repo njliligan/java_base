@@ -1,4 +1,4 @@
-package com.njganlili.String;
+package com.njganlili.basetype;
 
 /**
  * @author njgan
