@@ -66,6 +66,8 @@ public class ThreadPool {
         ScheduledExecutorService scheduledExecutorService1 = Executors.newScheduledThreadPool(10);
 
         //Java 8 新增创建线程池的方法，创建时如果不设置任何参数，则以当前机器处理器个数作为线程个数，此线程池会并行处理任务，不能保证执行顺序
+        //顾名思义，它是基于 work-stealing 算法的，其中一个任务可以产生其他较小的任务，这些任务被添加到并行处理线程的队列中。如果一个线程完成了工作并且无事可做，则可以从另一线程的队列中"窃取"工作。
+        //此外，此新池在何时使用ExecutorService和何时使用ForkJoinPool上又增加了一个灰色区域。现在，它们都具有这一共同的工作窃取原则作为其骨干，并且都可以用来优化大型计算递归任务。
         ExecutorService executorService4 = Executors.newWorkStealingPool();
 
         Long start = System.currentTimeMillis();
