@@ -1,8 +1,4 @@
-package com.njganlili.callback.tea.futrue.future.demo;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+package com.njganlili.juc.callback.tea.futrue.future.demo;
 
 /**
  * @author njgan

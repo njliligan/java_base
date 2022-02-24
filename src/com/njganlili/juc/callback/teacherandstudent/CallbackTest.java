@@ -1,4 +1,4 @@
-package com.njganlili.callback.teacherandstudent;
+package com.njganlili.juc.callback.teacherandstudent;
 
 /**
  * @author njgan

@@ -1,4 +1,4 @@
-package com.njganlili.steam;
+package com.njganlili.stream;
 
 import com.njganlili.CommonUtil;
 import com.njganlili.model.User;

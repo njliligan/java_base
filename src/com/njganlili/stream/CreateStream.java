@@ -1,4 +1,4 @@
-package com.njganlili.steam;
+package com.njganlili.stream;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

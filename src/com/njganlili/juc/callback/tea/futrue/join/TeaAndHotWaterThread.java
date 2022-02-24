@@ -1,4 +1,4 @@
-package com.njganlili.callback.tea.futrue.join;
+package com.njganlili.juc.callback.tea.futrue.join;
 
 /**
  * @author njgan

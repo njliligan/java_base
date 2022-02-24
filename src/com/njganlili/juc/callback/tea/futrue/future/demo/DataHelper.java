@@ -1,6 +1,5 @@
-package com.njganlili.callback.tea.futrue.future.demo;
+package com.njganlili.juc.callback.tea.futrue.future.demo;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 

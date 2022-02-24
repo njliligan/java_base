@@ -1,7 +1,5 @@
-package com.njganlili.callback.tea.futrue.future;
+package com.njganlili.juc.callback.tea.futrue.future;
 
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 

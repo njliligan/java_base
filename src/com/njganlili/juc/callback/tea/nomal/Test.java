@@ -1,4 +1,4 @@
-package com.njganlili.callback.tea.nomal;
+package com.njganlili.juc.callback.tea.nomal;
 
 /**
  * @author njgan
