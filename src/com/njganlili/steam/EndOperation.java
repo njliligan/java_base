@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author njgan
- * @description
+ * @description 结尾操作，无后续
  * @date 2022/2/13 10:51
  */
 public class EndOperation {
