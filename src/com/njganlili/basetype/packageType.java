@@ -31,6 +31,8 @@ public class packageType {
         Long g = 127L;
         Long h = 127L;
         System.out.println(g == h);
+
+        System.out.println(s == a);
     }
 
 }
