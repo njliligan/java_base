@@ -18,6 +18,7 @@ public class DateTimeTest {
         LocalDate localDateOf = LocalDate.of(2019,12,21);
         LocalTime localTime = LocalTime.now();
         LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime localDateTimeOf = LocalDateTime.of(2019,12,21,20,22,21);
         Instant instant = Instant.now();
         Clock clock = Clock.systemUTC();
         //格式化
@@ -54,7 +55,18 @@ public class DateTimeTest {
         System.out.println(localDate.isLeapYear());
         //反序列化
         System.out.println(LocalDateTime.parse(dateFormatter.format(localDateTime),dateFormatter));
-
+        //计算时间间隔
+        System.out.println("duration--------------------------------------------------------");
+        Duration duration = Duration.between(localDateTimeOf, localDateTime);
+        System.out.println(duration.toString());
+        System.out.println(duration.toDays());
+        //
+        System.out.println("period ---------------------------------------------------------");
+        Period period = Period.between(localDateOf, localDate);
+        System.out.println(period.getYears());
+        System.out.println(period.getMonths());
+        System.out.println(period.getDays());
+        System.out.println(period);
     }
 
 }
