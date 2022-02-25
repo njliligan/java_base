@@ -9,7 +9,7 @@ abstract interface Person{
     public abstract void eat();
 }
 
-public class InClassDemo {
+public class NoNameInnerClass {
 
     public static void main(String[] args){
         Person person = () ->{
