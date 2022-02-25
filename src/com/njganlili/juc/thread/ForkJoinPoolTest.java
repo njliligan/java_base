@@ -24,6 +24,11 @@ public class ForkJoinPoolTest {
             ForkJoinTask<Long> task = new SumTask(array, 0, array.length);
             long startTime = System.currentTimeMillis();
             Long result = ForkJoinPool.commonPool().invoke(task);
+            //Long result2  =ForkJoinPool.commonPool().submit(task);
+            //Long result3  =ForkJoinPool.commonPool().execute(task);
+            //execute(ForkJoinTask) 异步执行tasks，无返回值
+            //invoke(ForkJoinTask) 有Join, tasks会被同步到主进程?不一定，可能Jdk版本更新了，实现也不同
+            //submit(ForkJoinTask) 异步执行，且带Task返回值，可通过task.get 实现同步到主线程
             long endTime = System.currentTimeMillis();
             System.out.println("Fork/join sum: " + result + " in " + (endTime - startTime) + " ms.");
         }
@@ -49,6 +54,7 @@ class SumTask extends RecursiveTask<Long> {
 
     @Override
     protected Long compute() {
+        System.out.println(Thread.currentThread().getName());
         if (end - start <= THRESHOLD) {
             // 如果任务足够小,直接计算:
             long sum = 0;
