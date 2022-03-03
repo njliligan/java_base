@@ -58,7 +58,7 @@ public class ThreadLocalTest {
 //        thread2.start();
         //还是同一个线程里面
 //        thread1.run();
-        thread2.run();
+        thread2.start();
 
     }
 

@@ -23,6 +23,10 @@ public class Child extends Parent {
         super(name, age);
     }
 
+    public static void sss(){
+        System.out.println("child");
+    }
+
     Child(String name, String age, String sex){
         this.sex = sex;
         this.age = super.age;

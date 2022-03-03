@@ -17,6 +17,14 @@ public class Parent{
         System.out.println("调用父类的构造函数");
     }
 
+    public static void parents(){
+        System.out.println("parents");
+    }
+
+    public static void sss(){
+        System.out.println("parent");
+    }
+
     public Parent(String name, String age) {
         this.name = name;
         this.age = age;

@@ -55,8 +55,8 @@ public class ThreadPool {
                 }
             });
         }
-        //该方法创建一个可重用固定线程数的线程池，以共享的无界队列方式来运行这些线程，在需要时使用提供的 ThreadFactory 创建新线程
-        ExecutorService executorService3 = Executors.newFixedThreadPool(10);
+            //该方法创建一个可重用固定线程数的线程池，以共享的无界队列方式来运行这些线程，在需要时使用提供的 ThreadFactory 创建新线程
+            ExecutorService executorService3 = Executors.newFixedThreadPool(10);
 //        executorService.submit();
         executorService3.execute(()->{
             Arrays.asList("a","b","c").forEach(System.out::println);

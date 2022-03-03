@@ -15,6 +15,8 @@ public class Master {
         child2.p();
 //        son.g();
         Child child1 = new Child("miky","18","M");
+        child1.sss();
+        child1.parents();
         System.out.println(child1.toString());
     }
 
