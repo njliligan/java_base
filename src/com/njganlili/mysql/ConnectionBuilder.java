@@ -1,7 +1,7 @@
 package com.njganlili.mysql;
 
 
-import com.mysql.cj.xdevapi.Result;
+//import com.mysql.cj.xdevapi.Result;
 
 import java.sql.*;
 
