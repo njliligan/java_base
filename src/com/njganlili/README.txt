@@ -9,7 +9,8 @@ IO流，
 创建线程，
 构造方法，
 final,
-HashMap，直接取出来。
+HashMap，
+工厂
 
 
 
